@@ -1,0 +1,52 @@
+[project]
+name = "templates-api"
+version = "1.0.0"
+description = "A web API for the AMBIT/eNanoMapper data entry templates"
+license = "MIT"
+authors = [
+    "Nina Jeliazkova <jeliazkova.nina@gmail.com>",
+]
+maintainers = [
+    "Luchesar Iliev <luchesar.iliev@gmail.com>",
+    "Vedrin Jeliazkov <vedrin.jeliazkov@gmail.com>",
+]
+readme = "README.md"
+homepage = "https://enanomapper.adma.ai"
+repository = "https://github.com/ideaconsult/templates-api"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.12",
+    "uvicorn>=0.34.2",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q"
+pythonpath = [
+    "src",
+]
+filterwarnings = [
+    "error",  # treat all warnings as errors
+    "ignore:.*custom tp_new.*in Python 3.14.*:DeprecationWarning",
+]
+
+[tool.coverage.run]
+relative_files = true
+source = [
+    "tplapi",
+    "tests",
+]
+
+[tool.coverage.paths]
+source = [
+    "src",
+    "*/site-packages",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pre-commit>=4.2.0",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+]
