@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from .api import router as api_router
+from tplapi.api import router as api_router
 
 app = FastAPI(title="templates-api Placeholder API")
 

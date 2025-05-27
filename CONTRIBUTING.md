@@ -67,6 +67,11 @@ uv sync
 ```sh
 uv run pre-commit install
 ```
+```sh
+uv run fastapi dev src/tplapi/main.py
+```
+
+See also the [documentation](https://fastapi.tiangolo.com/fastapi-cli/) on FastAPI CLI.
 
 ## Running the formatters & linters
 
