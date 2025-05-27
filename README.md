@@ -2,12 +2,13 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/ideaconsult/templates-api/blob/COVERAGE-REPORT/htmlcov/index.html)
 
-| Name               |    Stmts |     Miss |    Cover |   Missing |
-|------------------- | -------: | -------: | -------: | --------: |
-| src/tplapi/api.py  |        5 |        0 |     100% |           |
-| src/tplapi/main.py |        4 |        0 |     100% |           |
-| tests/api\_test.py |        7 |        0 |     100% |           |
-|          **TOTAL** |   **16** |    **0** | **100%** |           |
+| Name                       |    Stmts |     Miss |    Cover |   Missing |
+|--------------------------- | -------: | -------: | -------: | --------: |
+| src/tplapi/\_\_init\_\_.py |        0 |        0 |     100% |           |
+| src/tplapi/api.py          |        5 |        0 |     100% |           |
+| src/tplapi/main.py         |        4 |        0 |     100% |           |
+| tests/api\_test.py         |        7 |        0 |     100% |           |
+|                  **TOTAL** |   **16** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
