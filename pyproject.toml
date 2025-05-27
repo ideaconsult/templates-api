@@ -45,6 +45,7 @@ source = [
 
 [dependency-groups]
 dev = [
+    "fastapi-cli>=0.0.7",
     "httpx>=0.28.1",
     "pre-commit>=4.2.0",
     "pytest>=8.3.5",
