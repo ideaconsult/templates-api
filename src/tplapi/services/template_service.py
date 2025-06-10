@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 
 import pandas as pd
 from openpyxl import load_workbook
+from pynanomapper.datamodel.templates import blueprint as bp
 
 from tplapi.config.app_config import initialize_dirs
 from tplapi.models.models import Task
@@ -72,9 +73,6 @@ def get_template_json(uuid):
     return json_data, file_path
 
 
-from pynanomapper.datamodel.templates import blueprint as bp
-
-
 async def get_template_xlsx(uuid, json_blueprint, project):
     try:
         file_path_xlsx = os.path.join(TEMPLATE_DIR, f"{uuid}.xlsx")
@@ -93,11 +91,11 @@ async def get_template_xlsx(uuid, json_blueprint, project):
                 bp.add_plate_layout(file_path_xlsx, json_blueprint)
                 json_blueprint["template_uuid"] = uuid
                 bp.add_hidden_jsondef(file_path_xlsx, json_blueprint)
-            except:
+            except Exception:
                 pass
             try:
                 add_project(file_path_xlsx, project)
-            except:
+            except Exception:
                 pass
             return file_path_xlsx
         else:
@@ -117,7 +115,9 @@ async def get_nmparser_config(uuid, json_blueprint, force=True):
 
 # 8h is for a test
 # otherwise we agreed on 1 month
-def cleanup(delta=timedelta(hours=8)):
+def cleanup(delta=None):
+    if delta is None:
+        delta = timedelta(hours=8)
     current_time = datetime.now()
     threshold_time = current_time - delta
 
@@ -164,7 +164,9 @@ def delete_template(template_path, task, base_url=None, uuid=None):
                     task.status = "Completed"
                 else:
                     task.status = "Error"
-                    task.error = f"Template is finalized, can't be deleted"
+                    task.error = (
+                        f"Template {template_path} is finalized, can't be deleted"
+                    )
 
         except Exception as err:
             task.status = "Error"
@@ -172,7 +174,7 @@ def delete_template(template_path, task, base_url=None, uuid=None):
             task.errorCause = traceback.format_exc()
     else:
         task.status = "Error"
-        task.error = f"Template not found"
+        task.error = f"Template {template_path} not found"
     task.completed = int(time.time() * 1000)
 
 
