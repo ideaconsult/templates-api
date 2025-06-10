@@ -15,3 +15,8 @@ async def get_build_number():
         return {"build_number": commit_hash}
     except Exception as e:
         return {"error": str(e)}
+
+
+@router.get("/health", tags=["health"])
+def health_check():
+    return {"status": "ok"}
