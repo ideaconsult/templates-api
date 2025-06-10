@@ -15,7 +15,7 @@ async def get_task(
     response: Response,
     if_none_match: str = None,
     if_modified_since: datetime = None,
-    tasks_db: dict = Depends(get_tasks_db),
+    tasks_db: dict = Depends(get_tasks_db),  # noqa: B008
 ):
     if if_none_match is None:
         if_none_match = Header(None, alias="If-None-Match")
@@ -36,5 +36,5 @@ async def get_task(
 
 
 @router.get("/task", response_model=List[Task])
-async def get_tasks(tasks_db: Dict[str, Task] = Depends(get_tasks_db)):
+async def get_tasks(tasks_db: Dict[str, Task] = Depends(get_tasks_db)):  # noqa: B008
     return list(tasks_db.values())

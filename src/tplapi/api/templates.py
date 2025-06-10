@@ -64,7 +64,7 @@ async def convert(
     request: Request,
     background_tasks: BackgroundTasks,
     response: Response,
-    tasks_db: dict = Depends(get_tasks_db),
+    tasks_db: dict = Depends(get_tasks_db),  # noqa: B008
 ):
     task_id = get_uuid()
     template_uuid = task_id
@@ -123,7 +123,7 @@ async def update(
     request: Request,
     background_tasks: BackgroundTasks,
     uuid: str,
-    tasks_db: dict = Depends(get_tasks_db),
+    tasks_db: dict = Depends(get_tasks_db),  # noqa: B008
 ):
     base_url = get_baseurl(request)
     task_id = get_uuid()
@@ -151,7 +151,7 @@ async def makecopy(
     request: Request,
     background_tasks: BackgroundTasks,
     uuid: str,
-    tasks_db: dict = Depends(get_tasks_db),
+    tasks_db: dict = Depends(get_tasks_db),  # noqa: B008
 ):
     base_url = get_baseurl(request)
     task_id = get_uuid()
@@ -397,7 +397,7 @@ async def delete_template(
     request: Request,
     background_tasks: BackgroundTasks,
     uuid: str,
-    tasks_db: dict = Depends(get_tasks_db),
+    tasks_db: dict = Depends(get_tasks_db),  # noqa: B008
 ):
     template_path = os.path.join(TEMPLATE_DIR, f"{uuid}.json")
     base_url = get_baseurl(request)
