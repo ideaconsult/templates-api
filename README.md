@@ -2,13 +2,23 @@
 
 [Full report](https://htmlpreview.github.io/?https://github.com/ideaconsult/templates-api/blob/COVERAGE-REPORT/htmlcov/index.html)
 
-| Name                       |    Stmts |     Miss |    Cover |   Missing |
-|--------------------------- | -------: | -------: | -------: | --------: |
-| src/tplapi/\_\_init\_\_.py |        0 |        0 |     100% |           |
-| src/tplapi/api.py          |        5 |        0 |     100% |           |
-| src/tplapi/main.py         |        4 |        0 |     100% |           |
-| tests/api\_test.py         |        7 |        0 |     100% |           |
-|                  **TOTAL** |   **16** |    **0** | **100%** |           |
+| Name                                     |    Stmts |     Miss |   Cover |   Missing |
+|----------------------------------------- | -------: | -------: | ------: | --------: |
+| src/tplapi/\_\_init\_\_.py               |        0 |        0 |    100% |           |
+| src/tplapi/api/\_\_init\_\_.py           |        0 |        0 |    100% |           |
+| src/tplapi/api/info.py                   |       13 |        2 |     85% |     16-17 |
+| src/tplapi/api/tasks.py                  |       20 |       10 |     50% |     20-35 |
+| src/tplapi/api/templates.py              |      220 |       73 |     67% |44-45, 58-59, 73, 78-80, 103-116, 128-146, 168-172, 237, 247, 261, 296-303, 340-373, 379-380, 383-384, 433-436 |
+| src/tplapi/api/utils.py                  |        7 |        0 |    100% |           |
+| src/tplapi/config/\_\_init\_\_.py        |        0 |        0 |    100% |           |
+| src/tplapi/config/app\_config.py         |       34 |        3 |     91% | 26-27, 33 |
+| src/tplapi/main.py                       |       41 |       10 |     76% |35-44, 48-61, 65 |
+| src/tplapi/models/\_\_init\_\_.py        |        0 |        0 |    100% |           |
+| src/tplapi/models/models.py              |       17 |        0 |    100% |           |
+| src/tplapi/services/template\_service.py |      149 |       49 |     67% |31-39, 45-46, 52-58, 68-70, 94-95, 98-99, 102-106, 119-143, 174-180, 234, 240-241 |
+| tests/api\_template\_test.py             |      182 |        4 |     98% |52, 57, 107-108 |
+| tests/api\_test.py                       |       31 |        0 |    100% |           |
+|                                **TOTAL** |  **714** |  **151** | **79%** |           |
 
 
 ## Setup coverage badge
