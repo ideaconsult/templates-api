@@ -23,17 +23,14 @@ from fastapi.responses import FileResponse, JSONResponse
 
 from tplapi.api.utils import get_baseurl
 from tplapi.config.app_config import initialize_dirs
-from tplapi.models.models import Task, tasks_db
+from tplapi.models.models import get_tasks_db, Task
 from tplapi.services import template_service
 
 router = APIRouter()
 
 config, UPLOAD_DIR, NEXUS_DIR, TEMPLATE_DIR = initialize_dirs()
 DATE_FORMAT = "%a, %d %b %Y %H:%M:%S %z"
-
-
-async def get_request(request: Request = Depends()):
-    return request
+FILE_FORMATS = ["xlsx", "json", "nmparser", "h5", "nxs"]
 
 
 def get_uuid():
@@ -64,7 +61,10 @@ def get_last_modified(file_path):
 
 @router.post("/template")  # Use router.post instead of app.post
 async def convert(
-    request: Request, background_tasks: BackgroundTasks, response: Response
+    request: Request,
+    background_tasks: BackgroundTasks,
+    response: Response,
+    tasks_db: dict = Depends(get_tasks_db),
 ):
     task_id = get_uuid()
     template_uuid = task_id
@@ -119,7 +119,12 @@ async def convert(
 
 
 @router.post("/template/{uuid}")  # Use router.post instead of app.post
-async def update(request: Request, background_tasks: BackgroundTasks, uuid: str):
+async def update(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    uuid: str,
+    tasks_db: dict = Depends(get_tasks_db),
+):
     base_url = get_baseurl(request)
     task_id = get_uuid()
     _json = await request.json()
@@ -142,7 +147,12 @@ async def update(request: Request, background_tasks: BackgroundTasks, uuid: str)
 
 
 @router.post("/template/{uuid}/copy")  # copy a template
-async def makecopy(request: Request, background_tasks: BackgroundTasks, uuid: str):
+async def makecopy(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    uuid: str,
+    tasks_db: dict = Depends(get_tasks_db),
+):
     base_url = get_baseurl(request)
     task_id = get_uuid()
     result_uuid = get_uuid()
@@ -209,12 +219,10 @@ async def get_template(
     request: Request,
     response: Response,
     uuid: str,
-    format: str = Query(
-        None, description="format", enum=["xlsx", "json", "nmparser", "h5", "nxs"]
-    ),
-    project: str = Query(None, description="project"),
-    if_none_match: str = Header(None, alias="If-None-Match"),
-    if_modified_since: str = Header(None, alias="If-Modified-Since"),
+    format: str = Query(None, description="format", enum=FILE_FORMATS),  # noqa: B008
+    project: str = Query(None, description="project"),  # noqa: B008
+    if_none_match: str = Header(None, alias="If-None-Match"),  # noqa: B008
+    if_modified_since: str = Header(None, alias="If-Modified-Since"),  # noqa: B008
 ):
     # Construct the file path based on the provided UUID
     format_supported = {
@@ -306,10 +314,10 @@ def generate_etag_for_response(uuids):
 @router.get("/template")
 async def get_templates(
     request: Request,
-    q: str = Query(None),
+    q: str = Query(None),  # noqa: B008
     response: Response = None,
-    if_modified_since: str = Header(None, alias="If-Modified-Since"),
-    if_none_match: str = Header(None, alias="If-None-Match"),
+    if_modified_since: str = Header(None, alias="If-Modified-Since"),  # noqa: B008
+    if_none_match: str = Header(None, alias="If-None-Match"),  # noqa: B008
 ):
     base_url = get_baseurl(request)
     uuids = {}
@@ -386,7 +394,10 @@ async def get_templates(
     },
 )
 async def delete_template(
-    request: Request, background_tasks: BackgroundTasks, uuid: str
+    request: Request,
+    background_tasks: BackgroundTasks,
+    uuid: str,
+    tasks_db: dict = Depends(get_tasks_db),
 ):
     template_path = os.path.join(TEMPLATE_DIR, f"{uuid}.json")
     base_url = get_baseurl(request)

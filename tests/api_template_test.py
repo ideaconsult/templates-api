@@ -85,7 +85,8 @@ def setup_template_dir(config_dict):
         timestamp = new_modified_date.timestamp()
         os.utime(file_path, times=(timestamp, timestamp))
         now_date = datetime.now(tz.utc) - timedelta(hours=12)
-        # headers = {"If-Modified-Since": now_date.strftime("%a, %d %b %Y %H:%M:%S GMT")}
+        # headers = {"If-Modified-Since":
+        # now_date.strftime("%a, %d %b %Y %H:%M:%S GMT")}
         assert new_modified_date <= now_date, new_modified_date
     # Perform setup operations here, if any
     # yield  # This is where the test runs

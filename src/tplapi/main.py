@@ -3,12 +3,14 @@ import time
 import traceback
 from datetime import timedelta
 from importlib.metadata import version
+from typing import Dict  # Import Dict
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
 
 from tplapi.api import info, tasks, templates
-from tplapi.models.models import tasks_db
+from tplapi.models.models import _global_tasks_db, Task
 from tplapi.services import template_service
 from .config.app_config import initialize_dirs
 
@@ -42,7 +44,7 @@ async def global_exception_handler(request: Request, exc: Exception):
     return JSONResponse(status_code=500, content={"detail": "Internal Server Error"})
 
 
-def cleanup_tasks():
+def cleanup_tasks(tasks_db: Dict[str, Task]):
     current_time = int(
         time.time() * 1000
     )  # Current time in seconds , ms are fractional
@@ -70,6 +72,9 @@ app.include_router(templates.router, prefix="", tags=["templates"])
 for route in app.routes:
     print(f"Route: {route.path} | Methods: {route.methods}")
 scheduler = BackgroundScheduler()
-scheduler.add_job(cleanup_tasks, "interval", minutes=120)  # Clean up every 120 minutes
-# scheduler.add_job(cleanup_templates, 'interval', hours=24)  # test, otherwise once a day would be ok
+scheduler.add_job(
+    cleanup_tasks, "interval", minutes=120, args=[_global_tasks_db]
+)  # Clean up every 120 minutes
+# scheduler.add_job(cleanup_templates, 'interval', hours=24)
+# test, otherwise once a day would be ok
 scheduler.start()

@@ -11,10 +11,20 @@ class Task(BaseModel):
     policyError: Optional[str] = None
     status: str
     started: int
-    completed: Optional[str] = None
+    completed: Optional[int] = None
     result: str
     result_uuid: Optional[str] = None
     errorCause: Optional[str] = None
 
 
-tasks_db: Dict[str, Task] = {}
+# --- In-memory "database" simulation ---
+_global_tasks_db: Dict[str, Task] = {}
+
+
+# --- Dependency to get the tasks database ---
+def get_tasks_db() -> Dict[str, Task]:
+    """
+    Dependency that provides the in-memory tasks database.
+    In a real app, this would provide a database session or connection.
+    """
+    return _global_tasks_db
