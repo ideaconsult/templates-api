@@ -1,5 +1,5 @@
 ARG py_version=3.13
-ARG uv_version=0.7.8
+ARG uv_version=0.7.12
 
 FROM ghcr.io/astral-sh/uv:${uv_version}-alpine AS requirements-stage
 
