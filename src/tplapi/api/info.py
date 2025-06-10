@@ -17,6 +17,6 @@ async def get_build_number():
         return {"error": str(e)}
 
 
-@router.get("/health", tags=["health"])
+@router.get("/health")
 def health_check():
     return {"status": "ok"}
