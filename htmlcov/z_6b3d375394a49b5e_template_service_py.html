@@ -54,8 +54,8 @@
             </div>
         </aside>
         <h2>
-            <span class="text">149 statements &nbsp;</span>
-            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">100<span class="text"> run</span></button>
+            <span class="text">148 statements &nbsp;</span>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">99<span class="text"> run</span></button>
             <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">49<span class="text"> missing</span></button>
             <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">0<span class="text"> excluded</span></button>
         </h2>
@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="z_a44f0ac069e85531_api_template_test_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.8.2">coverage.py v7.8.2</a>,
-            created at 2025-06-10 17:50 +0000
+            created at 2025-06-13 13:35 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -159,7 +159,7 @@
     <p class="run"><span class="n"><a id="t77" href="#t77">77</a></span><span class="t">    <span class="key">try</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t78" href="#t78">78</a></span><span class="t">        <span class="nam">file_path_xlsx</span> <span class="op">=</span> <span class="nam">os</span><span class="op">.</span><span class="nam">path</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="nam">TEMPLATE_DIR</span><span class="op">,</span> <span class="fst">f"</span><span class="op">{</span><span class="nam">uuid</span><span class="op">}</span><span class="fst">.xlsx</span><span class="fst">"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t79" href="#t79">79</a></span><span class="t">        <span class="nam">json_blueprint</span> <span class="op">=</span> <span class="nam">clean_blueprint_json</span><span class="op">(</span><span class="nam">json_blueprint</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t80" href="#t80">80</a></span><span class="t">        <span class="nam">print</span><span class="op">(</span><span class="nam">json_blueprint</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t80" href="#t80">80</a></span><span class="t">        <span class="com"># print(json_blueprint)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t81" href="#t81">81</a></span><span class="t">        <span class="nam">layout</span> <span class="op">=</span> <span class="nam">json_blueprint</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">"template_layout"</span><span class="op">,</span> <span class="str">"dose_response"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t82" href="#t82">82</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t83" href="#t83">83</a></span><span class="t">        <span class="key">if</span> <span class="nam">layout</span> <span class="op">==</span> <span class="str">"dose_response"</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -324,22 +324,24 @@
     <p class="pln"><span class="n"><a id="t242" href="#t242">242</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t243" href="#t243">243</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t244" href="#t244">244</a></span><span class="t"><span class="key">def</span> <span class="nam">clean_blueprint_json</span><span class="op">(</span><span class="nam">data</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t245" href="#t245">245</a></span><span class="t">    <span class="nam">valid_conditions</span> <span class="op">=</span> <span class="op">{</span><span class="nam">condition</span><span class="op">[</span><span class="str">"conditon_name"</span><span class="op">]</span> <span class="key">for</span> <span class="nam">condition</span> <span class="key">in</span> <span class="nam">data</span><span class="op">[</span><span class="str">"conditions"</span><span class="op">]</span><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t246" href="#t246">246</a></span><span class="t">    <span class="key">for</span> <span class="nam">report</span> <span class="key">in</span> <span class="nam">data</span><span class="op">[</span><span class="str">"raw_data_report"</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t247" href="#t247">247</a></span><span class="t">        <span class="key">if</span> <span class="str">"raw_conditions"</span> <span class="key">in</span> <span class="nam">report</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t248" href="#t248">248</a></span><span class="t">            <span class="nam">report</span><span class="op">[</span><span class="str">"raw_conditions"</span><span class="op">]</span> <span class="op">=</span> <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t249" href="#t249">249</a></span><span class="t">                <span class="nam">condition</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t250" href="#t250">250</a></span><span class="t">                <span class="key">for</span> <span class="nam">condition</span> <span class="key">in</span> <span class="nam">report</span><span class="op">[</span><span class="str">"raw_conditions"</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t251" href="#t251">251</a></span><span class="t">                <span class="key">if</span> <span class="nam">condition</span> <span class="key">in</span> <span class="nam">valid_conditions</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t252" href="#t252">252</a></span><span class="t">            <span class="op">]</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t253" href="#t253">253</a></span><span class="t">    <span class="key">for</span> <span class="nam">report</span> <span class="key">in</span> <span class="nam">data</span><span class="op">[</span><span class="str">"question3"</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t254" href="#t254">254</a></span><span class="t">        <span class="key">if</span> <span class="str">"results_conditions"</span> <span class="key">in</span> <span class="nam">report</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t255" href="#t255">255</a></span><span class="t">            <span class="nam">report</span><span class="op">[</span><span class="str">"results_conditions"</span><span class="op">]</span> <span class="op">=</span> <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t256" href="#t256">256</a></span><span class="t">                <span class="nam">condition</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t257" href="#t257">257</a></span><span class="t">                <span class="key">for</span> <span class="nam">condition</span> <span class="key">in</span> <span class="nam">report</span><span class="op">[</span><span class="str">"results_conditions"</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t258" href="#t258">258</a></span><span class="t">                <span class="key">if</span> <span class="nam">condition</span> <span class="key">in</span> <span class="nam">valid_conditions</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t259" href="#t259">259</a></span><span class="t">            <span class="op">]</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t260" href="#t260">260</a></span><span class="t">    <span class="key">return</span> <span class="nam">data</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t245" href="#t245">245</a></span><span class="t">    <span class="nam">valid_conditions</span> <span class="op">=</span> <span class="op">{</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t246" href="#t246">246</a></span><span class="t">        <span class="nam">condition</span><span class="op">[</span><span class="str">"conditon_name"</span><span class="op">]</span> <span class="key">for</span> <span class="nam">condition</span> <span class="key">in</span> <span class="nam">data</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">"conditions"</span><span class="op">,</span> <span class="op">[</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t247" href="#t247">247</a></span><span class="t">    <span class="op">}</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t248" href="#t248">248</a></span><span class="t">    <span class="key">for</span> <span class="nam">report</span> <span class="key">in</span> <span class="nam">data</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">"raw_data_report"</span><span class="op">,</span> <span class="op">[</span><span class="op">]</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t249" href="#t249">249</a></span><span class="t">        <span class="key">if</span> <span class="str">"raw_conditions"</span> <span class="key">in</span> <span class="nam">report</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t250" href="#t250">250</a></span><span class="t">            <span class="nam">report</span><span class="op">[</span><span class="str">"raw_conditions"</span><span class="op">]</span> <span class="op">=</span> <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t251" href="#t251">251</a></span><span class="t">                <span class="nam">condition</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t252" href="#t252">252</a></span><span class="t">                <span class="key">for</span> <span class="nam">condition</span> <span class="key">in</span> <span class="nam">report</span><span class="op">[</span><span class="str">"raw_conditions"</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t253" href="#t253">253</a></span><span class="t">                <span class="key">if</span> <span class="nam">condition</span> <span class="key">in</span> <span class="nam">valid_conditions</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t254" href="#t254">254</a></span><span class="t">            <span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t255" href="#t255">255</a></span><span class="t">    <span class="key">for</span> <span class="nam">report</span> <span class="key">in</span> <span class="nam">data</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">"question3"</span><span class="op">,</span> <span class="op">[</span><span class="op">]</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t256" href="#t256">256</a></span><span class="t">        <span class="key">if</span> <span class="str">"results_conditions"</span> <span class="key">in</span> <span class="nam">report</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t257" href="#t257">257</a></span><span class="t">            <span class="nam">report</span><span class="op">[</span><span class="str">"results_conditions"</span><span class="op">]</span> <span class="op">=</span> <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t258" href="#t258">258</a></span><span class="t">                <span class="nam">condition</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t259" href="#t259">259</a></span><span class="t">                <span class="key">for</span> <span class="nam">condition</span> <span class="key">in</span> <span class="nam">report</span><span class="op">[</span><span class="str">"results_conditions"</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t260" href="#t260">260</a></span><span class="t">                <span class="key">if</span> <span class="nam">condition</span> <span class="key">in</span> <span class="nam">valid_conditions</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t261" href="#t261">261</a></span><span class="t">            <span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t262" href="#t262">262</a></span><span class="t">    <span class="key">return</span> <span class="nam">data</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -349,7 +351,7 @@
             <a class="nav" href="z_a44f0ac069e85531_api_template_test_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.8.2">coverage.py v7.8.2</a>,
-            created at 2025-06-10 17:50 +0000
+            created at 2025-06-13 13:35 +0000
         </p>
     </div>
 </footer>
