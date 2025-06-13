@@ -77,7 +77,7 @@ async def get_template_xlsx(uuid, json_blueprint, project):
     try:
         file_path_xlsx = os.path.join(TEMPLATE_DIR, f"{uuid}.xlsx")
         json_blueprint = clean_blueprint_json(json_blueprint)
-        print(json_blueprint)
+        # print(json_blueprint)
         layout = json_blueprint.get("template_layout", "dose_response")
 
         if layout == "dose_response":
@@ -242,15 +242,17 @@ def add_project(file_path, project):
 
 
 def clean_blueprint_json(data):
-    valid_conditions = {condition["conditon_name"] for condition in data["conditions"]}
-    for report in data["raw_data_report"]:
+    valid_conditions = {
+        condition["conditon_name"] for condition in data.get("conditions", [])
+    }
+    for report in data.get("raw_data_report", []):
         if "raw_conditions" in report:
             report["raw_conditions"] = [
                 condition
                 for condition in report["raw_conditions"]
                 if condition in valid_conditions
             ]
-    for report in data["question3"]:
+    for report in data.get("question3", []):
         if "results_conditions" in report:
             report["results_conditions"] = [
                 condition
