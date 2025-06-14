@@ -842,7 +842,7 @@ survey_js = {
                 "You will design a 'blueprint' of a data entry"
                 " template to report result for the method described."
             ),
-            "navigationtitle": "1. Method",
+            "navigationTitle": "1. Method",
             "navigationDescription": "description",
         },
         {
@@ -1304,7 +1304,7 @@ survey_js = {
                 },
             ],
             "title": "[{template_name}]: Results",
-            "navigationtitle": "2. Results",
+            "navigationTitle": "2. Results",
             "description": (
                 "Please describe the results expected from method [{METHOD}]"
             ),
@@ -1394,7 +1394,7 @@ survey_js = {
                     "allowRowsDragAndDrop": True,
                 },
             ],
-            "navigationtitle": "3. Method parameters",
+            "navigationTitle": "3. Method parameters",
             "navigationDescription": "Method and instrument parameters",
             "title": "[{template_name}]: Method parameters",
             "description": "Please describe all relevant [{METHOD}] parameters",
@@ -1477,7 +1477,7 @@ survey_js = {
                     "allowRowsDragAndDrop": True,
                 },
             ],
-            "navigationtitle": "4. Sample",
+            "navigationTitle": "4. Sample",
             "navigationDescription": "Sample description",
             "title": "[{template_name}]: Sample details",
             "description": "Parameters to desribe the materials tested by [{METHOD}]",
@@ -1580,7 +1580,7 @@ survey_js = {
             ],
             "title": "[{template_name}]: Sample preparation",
             "description": "Details of sample preparation to be tested by [{METHOD}]",
-            "navigationtitle": "5. Sample preparation",
+            "navigationTitle": "5. Sample preparation",
             "navigationDescription": "Sample preparation",
         },
         {
@@ -1591,7 +1591,7 @@ survey_js = {
                 " You may enter default values."
                 " The user can change the values in the template"
             ),
-            "navigationtitle": "6. Provenance",
+            "navigationTitle": "6. Provenance",
             "navigationDescription": "Predefined fields describing provenance",
             "elements": [
                 {
@@ -1704,7 +1704,7 @@ survey_js = {
             ],
             "title": "[{template_name}]: Template layout",
             "description": "Select from several supported layouts",
-            "navigationtitle": "7. Layout",
+            "navigationTitle": "7. Layout",
             "navigationDescription": "Select the most appropriate Excel layout",
         },
         {
@@ -1823,7 +1823,7 @@ survey_js = {
                 "You will be able to generate Excel templates,"
                 " share the blueprint and make copies of the blueprint."
             ),
-            "navigationtitle": "8. Preview/Finalize",
+            "navigationTitle": "8. Preview/Finalize",
             "navigationDescription": "Predefined fields describing provenance",
         },
     ],
