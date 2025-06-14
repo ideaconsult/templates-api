@@ -884,6 +884,10 @@ survey_js = {
                                     "value": "data_platelayout",
                                     "text": "Plate layout",
                                 },
+                                {
+                                    "value": "data_calibration",
+                                    "text": "Calibration curve",
+                                },
                             ],
                             "hasOther": True,
                             "othertext": "Other (please specify)",
@@ -931,6 +935,150 @@ survey_js = {
                                 "separate files you may use the 'Pointer to file' type."
                             ),
                             "readOnly": True,
+                        },
+                        {
+                            "type": "matrixdynamic",
+                            "name": "calibration_report",
+                            "visibleIf": "{data_sheets} contains 'data_calibration'",
+                            "title": "Calibration (standard) curve",
+                            "addRowText": "Add empty row",
+                            "description": (
+                                "Please provide information of the parameters"
+                                " reported as unprocessed data (e.g. Absorbance"
+                                ", AU). Use the + button to specify which"
+                                " factors are varied. If your data is in "
+                                "separate files you may use the "
+                                "'Pointer to file' type."
+                            ),
+                            "requiredIf": "{data_sheets} contains 'data_calibration'",
+                            "showCommentArea": True,
+                            "columns": [
+                                {
+                                    "name": "calibration_endpoint",
+                                    "title": "Name",
+                                    "isRequired": True,
+                                },
+                                {
+                                    "name": "calibration_aggregate",
+                                    "title": "Mark if aggregated",
+                                    "cellType": "dropdown",
+                                    "isRequired": False,
+                                    "defaultValue": "RAW_DATA",
+                                    "choices": [
+                                        {
+                                            "value": "RAW_DATA",
+                                            "text": "Raw data",
+                                        },
+                                        {
+                                            "value": "MEAN",
+                                            "text": "Mean",
+                                        },
+                                        {
+                                            "value": "MEDIAN",
+                                            "text": "Median",
+                                        },
+                                        {
+                                            "value": "MODE",
+                                            "text": "Mode",
+                                        },
+                                        {
+                                            "value": "AGGREGATED",
+                                            "text": "Aggregated",
+                                        },
+                                        {
+                                            "value": "NORMALIZED",
+                                            "text": "Normalized",
+                                        },
+                                        {
+                                            "value": "",
+                                            "text": "Other",
+                                        },
+                                    ],
+                                },
+                                {
+                                    "name": "valibration_unit",
+                                    "title": "Unit",
+                                },
+                                {
+                                    "name": "calibration_endpoint_uncertainty",
+                                    "title": "Uncertainty",
+                                    "cellType": "dropdown",
+                                    "isRequired": False,
+                                    "choices": [
+                                        {
+                                            "value": "none",
+                                            "text": "",
+                                        },
+                                        {
+                                            "value": "SD",
+                                            "text": "Standard Deviation",
+                                        },
+                                    ],
+                                },
+                                {
+                                    "name": "calibration_type",
+                                    "title": "Type",
+                                    "cellType": "dropdown",
+                                    "isRequired": True,
+                                    "defaultValue": "value_num",
+                                    "choices": [
+                                        {
+                                            "value": "value_num",
+                                            "text": "numeric",
+                                        },
+                                        {
+                                            "value": "value_spectrum",
+                                            "text": "spectrum",
+                                        },
+                                        {
+                                            "value": "value_timeseries",
+                                            "text": "time series",
+                                        },
+                                        {
+                                            "value": "value_image",
+                                            "text": "image",
+                                        },
+                                        {
+                                            "value": "value_1darray",
+                                            "text": "1D array",
+                                        },
+                                        {
+                                            "value": "value_2darray",
+                                            "text": "2D array",
+                                        },
+                                        {
+                                            "value": "value_text",
+                                            "text": "text",
+                                        },
+                                        {
+                                            "value": "value_file",
+                                            "text": "Pointer to a file",
+                                        },
+                                        {
+                                            "value": "value_database",
+                                            "text": (
+                                                "Link to a database entry (e.g. GEO)"
+                                            ),
+                                        },
+                                    ],
+                                },
+                            ],
+                            "detailElements": [
+                                {
+                                    "type": "checkbox",
+                                    "name": "calibration_conditions",
+                                    "title": (
+                                        "Please select the experimental factors (these are defined in the Method page)"
+                                    ),
+                                    "choicesFromQuestion": "conditions",
+                                    "_visibleIf": "{conditions.rowCount} > 0",
+                                    "minSelectedChoices": 0,
+                                },
+                            ],
+                            "detailPanelMode": "underRowSingle",
+                            "cellType": "text",
+                            "rowCount": 1,
+                            "allowRowsDragAndDrop": True,
                         },
                         {
                             "type": "matrixdynamic",
