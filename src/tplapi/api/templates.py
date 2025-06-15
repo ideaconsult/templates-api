@@ -20,10 +20,10 @@ from fastapi import (
     status,
 )
 from fastapi.responses import FileResponse, JSONResponse
+from pynanomapper.datamodel.templates import template_designer
 
 from tplapi.api.utils import get_baseurl
 from tplapi.config.app_config import initialize_dirs
-from tplapi.models import template_designer
 from tplapi.models.models import get_tasks_db, Task
 from tplapi.services import template_service
 
