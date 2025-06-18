@@ -81,8 +81,8 @@ async def get_template_xlsx(uuid, json_blueprint, project):
         layout = json_blueprint.get("template_layout", "dose_response")
 
         if layout == "dose_response":
-            df_info, df_result, df_raw, df_conditions = bp.get_template_frame(
-                json_blueprint
+            df_info, df_result, df_raw, df_conditions, df_calibration = (
+                bp.get_template_frame(json_blueprint)
             )
             bp.iom_format_2excel(
                 file_path_xlsx, df_info, df_result, df_raw, df_conditions
