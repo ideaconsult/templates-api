@@ -16,9 +16,9 @@
 | src/tplapi/models/\_\_init\_\_.py        |        0 |        0 |    100% |           |
 | src/tplapi/models/models.py              |       17 |        0 |    100% |           |
 | src/tplapi/services/template\_service.py |      148 |       49 |     67% |31-39, 45-46, 52-58, 68-70, 99-100, 103-104, 107-111, 124-148, 179-185, 239, 245-246 |
-| tests/api\_template\_test.py             |      182 |        4 |     98% |52, 57, 107-108 |
+| tests/api\_template\_test.py             |      194 |        4 |     98% |55, 60, 110-111 |
 | tests/api\_test.py                       |       31 |        0 |    100% |           |
-|                                **TOTAL** |  **717** |  **152** | **79%** |           |
+|                                **TOTAL** |  **729** |  **152** | **79%** |           |
 
 
 ## Setup coverage badge
