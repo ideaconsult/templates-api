@@ -85,7 +85,12 @@ async def get_template_xlsx(uuid, json_blueprint, project):
                 bp.get_template_frame(json_blueprint)
             )
             bp.iom_format_2excel(
-                file_path_xlsx, df_info, df_result, df_raw, df_conditions
+                file_path_xlsx,
+                df_info,
+                df_result,
+                df_raw,
+                df_conditions,
+                df_calibration,
             )
             try:
                 bp.add_plate_layout(file_path_xlsx, json_blueprint)
