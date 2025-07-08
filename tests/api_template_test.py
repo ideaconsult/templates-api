@@ -18,7 +18,9 @@ TEST_NONAME_PATH = (
     Path(__file__).parent / "resources/templates/dose_response_noname.json"
 )
 TEST_RAMAN_PATH = Path(__file__).parent / "resources/templates/raman.json"
+TEST_CALIBRATION_PATH = Path(__file__).parent / "resources/templates/calibration.json"
 
+TEMPLATE_UUID_CALIBRATION = "f5c9fffd-4751-5000-94c6-46957b8470ec"
 TEMPLATE_UUID_RAMAN = "a282b2c4-8dfe-4cca-9bcd-1d276a23bb4e"
 TEMPLATE_UUID = "3c22a1f0-a933-4855-848d-05fcc26ceb7a"
 TEMPLATE_UUID_invalid = "3c22a1f0-a933-4855-848d-05fcc26ceb7b"
@@ -30,6 +32,7 @@ _TEMPLATES = [
     (TEST_INVALID_PATH, TEMPLATE_UUID_invalid),
     (TEST_NONAME_PATH, TEMPLATE_UUID_noname),
     (TEST_RAMAN_PATH, TEMPLATE_UUID_RAMAN),
+    (TEST_CALIBRATION_PATH, TEMPLATE_UUID_CALIBRATION),
 ]
 client = TestClient(app)
 
@@ -224,6 +227,23 @@ def test_doseresponse_excel(setup_template_dir):
         file.write(response_xlsx.content)
     df = pd.read_excel(save_path, sheet_name="Materials")
     assert df.shape[0] > 0, "materials"
+
+
+def test_calibrationsheet_excel(setup_template_dir):
+    modified_date = datetime.now(tz.utc) - timedelta(hours=12)
+    headers = {"If-Modified-Since": modified_date.strftime("%a, %d %b %Y %H:%M:%S GMT")}
+    # we ignore the header, want to generate the file on-the-fly
+    response_xlsx = client.get(
+        "/template/{}?format=xlsx&project=nanoreg".format(TEMPLATE_UUID_CALIBRATION),
+        headers=headers,
+    )
+    assert response_xlsx.status_code == 200, response_xlsx.headers
+    # print(response_xlsx.headers)
+    save_path = os.path.join(setup_template_dir, "{}.xlsx".format(TEMPLATE_UUID_CALIBRATION))
+    with open(save_path, "wb") as file:
+        file.write(response_xlsx.content)
+    with pd.ExcelFile(save_path) as xl:
+        assert "Calibration_TABLE" in xl.sheet_names
 
 
 def test_raman_excel(setup_template_dir):
