@@ -239,7 +239,9 @@ def test_calibrationsheet_excel(setup_template_dir):
     )
     assert response_xlsx.status_code == 200, response_xlsx.headers
     # print(response_xlsx.headers)
-    save_path = os.path.join(setup_template_dir, "{}.xlsx".format(TEMPLATE_UUID_CALIBRATION))
+    save_path = os.path.join(
+        setup_template_dir, "{}.xlsx".format(TEMPLATE_UUID_CALIBRATION)
+    )
     with open(save_path, "wb") as file:
         file.write(response_xlsx.content)
     with pd.ExcelFile(save_path) as xl:
