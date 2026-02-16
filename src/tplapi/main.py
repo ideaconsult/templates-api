@@ -1,4 +1,5 @@
 import logging
+import os
 import time
 import traceback
 from datetime import timedelta
@@ -8,8 +9,9 @@ from typing import Dict  # Import Dict
 from apscheduler.schedulers.background import BackgroundScheduler
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from h5grove import fastapi_utils
 
-from tplapi.api import info, tasks, templates
+from tplapi.api import info, tasks, templates, upload
 from tplapi.models.models import _global_tasks_db, Task
 from tplapi.services import template_service
 from .config.app_config import initialize_dirs
@@ -65,9 +67,13 @@ def cleanup_templates():
     template_service.cleanup(timedelta(hours=24 * 30 * 6))
 
 
+fastapi_utils.settings.base_dir = os.path.abspath(NEXUS_DIR)
 app.include_router(tasks.router, prefix="", tags=["task"])
 app.include_router(info.router, prefix="", tags=["info"])
 app.include_router(templates.router, prefix="", tags=["templates"])
+app.include_router(upload.router, prefix="", tags=["dataset"])
+app.include_router(fastapi_utils.router, prefix="/h5grove", tags=["h5grove"])
+
 
 for route in app.routes:
     print(f"Route: {route.path} | Methods: {route.methods}")

@@ -233,6 +233,8 @@ async def get_template(
         },
         "json": {"mime": "application/json", "ext": "json"},
         "nmparser": {"mime": "application/json", "ext": "nmparser.json"},
+        "nxs": {"mime": "application/x-hdf5", "ext": "nxs"},
+        "h5": {"mime": "application/x-hdf5", "ext": "nxs"},
     }
     if not is_valid_uuid(uuid):
         raise HTTPException(status_code=400, detail="Invalid UUID")
@@ -299,6 +301,27 @@ async def get_template(
                 raise HTTPException(
                     status_code=400,
                     detail="The blueprint may not be complete. {}".format(err),
+                )
+        elif format in ["nxs", "h5"]:
+            try:
+                file_path = await template_service.get_template_nexus(
+                    uuid, json_blueprint
+                )
+                # Return the file using FileResponse
+                _response = FileResponse(
+                    file_path,
+                    media_type=format_supported[format]["mime"],
+                    headers={
+                        "Content-Disposition": f'attachment; filename="{uuid}.nxs"'
+                    },
+                )
+                _response.headers.update(custom_headers)
+                return _response
+            except Exception as err:
+                traceback.print_exc()
+                raise HTTPException(
+                    status_code=400,
+                    detail="Error generating NeXus file: {}".format(err),
                 )
     else:
         raise HTTPException(status_code=400, detail="Format not supported")
