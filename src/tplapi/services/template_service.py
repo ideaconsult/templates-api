@@ -113,6 +113,38 @@ async def get_nmparser_config(uuid, json_blueprint, force=True):
     return file_path
 
 
+async def get_template_nexus(uuid, json_blueprint):
+    """
+    Generate NeXus file from template blueprint.
+
+    Args:
+        uuid: Template UUID
+        json_blueprint: Template JSON blueprint
+
+    Returns:
+        Path to generated NeXus file
+
+    Raises:
+        Exception: If conversion fails
+    """
+    try:
+        # First generate Excel (needed for parsing with TemplateDesignerParser)
+        xlsx_path = await get_template_xlsx(uuid, json_blueprint, None)
+
+        # Convert to NeXus
+        nexus_path = os.path.join(TEMPLATE_DIR, f"{uuid}.nxs")
+
+        # Import here to avoid circular dependency
+        from pynanomapper.datamodel.templates.excel_to_nexus import excel_to_nexus
+
+        excel_to_nexus(xlsx_path, nexus_path)
+
+        return nexus_path
+
+    except Exception as err:
+        raise err
+
+
 # 8h is for a test
 # otherwise we agreed on 1 month
 def cleanup(delta=None):
