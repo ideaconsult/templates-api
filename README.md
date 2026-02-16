@@ -8,17 +8,19 @@
 | src/tplapi/api/\_\_init\_\_.py           |        0 |        0 |    100% |           |
 | src/tplapi/api/info.py                   |       13 |        2 |     85% |     16-17 |
 | src/tplapi/api/tasks.py                  |       20 |       10 |     50% |     20-35 |
-| src/tplapi/api/templates.py              |      224 |       74 |     67% |45-46, 59-60, 74, 79-81, 104-117, 129-147, 169-173, 238, 248, 262, 297-304, 341-374, 380-381, 384-385, 434-437, 442 |
+| src/tplapi/api/templates.py              |      233 |       83 |     64% |45-46, 59-60, 74, 79-81, 104-117, 129-147, 169-173, 240, 250, 264, 299-327, 364-397, 403-404, 407-408, 457-460, 465 |
+| src/tplapi/api/upload.py                 |       86 |       64 |     26% |30, 47-70, 74-80, 97-147, 177-215, 220-236 |
 | src/tplapi/api/utils.py                  |        7 |        0 |    100% |           |
 | src/tplapi/config/\_\_init\_\_.py        |        0 |        0 |    100% |           |
 | src/tplapi/config/app\_config.py         |       34 |        3 |     91% | 26-27, 33 |
-| src/tplapi/main.py                       |       41 |       10 |     76% |35-44, 48-61, 65 |
+| src/tplapi/main.py                       |       46 |       10 |     78% |37-46, 50-63, 67 |
 | src/tplapi/models/\_\_init\_\_.py        |        0 |        0 |    100% |           |
 | src/tplapi/models/models.py              |       17 |        0 |    100% |           |
-| src/tplapi/services/template\_service.py |      148 |       49 |     67% |31-39, 45-46, 52-58, 68-70, 99-100, 103-104, 107-111, 124-148, 179-185, 239, 245-246 |
+| src/tplapi/services/template\_service.py |      157 |       57 |     64% |31-39, 45-46, 52-58, 68-70, 99-100, 103-104, 107-111, 135-150, 156-180, 211-217, 271, 277-278 |
+| src/tplapi/services/upload\_service.py   |       97 |       76 |     22% |24-38, 44-70, 74-89, 95-113, 117-125 |
 | tests/api\_template\_test.py             |      194 |        4 |     98% |55, 60, 110-111 |
 | tests/api\_test.py                       |       31 |        0 |    100% |           |
-|                                **TOTAL** |  **729** |  **152** | **79%** |           |
+|                                **TOTAL** |  **935** |  **309** | **67%** |           |
 
 
 ## Setup coverage badge
