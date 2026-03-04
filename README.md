@@ -12,15 +12,15 @@
 | src/tplapi/api/upload.py                 |       86 |       64 |     26% |30, 47-70, 74-80, 97-147, 177-215, 220-236 |
 | src/tplapi/api/utils.py                  |        7 |        0 |    100% |           |
 | src/tplapi/config/\_\_init\_\_.py        |        0 |        0 |    100% |           |
-| src/tplapi/config/app\_config.py         |       34 |        3 |     91% | 26-27, 33 |
+| src/tplapi/config/app\_config.py         |       32 |        3 |     91% | 26-27, 33 |
 | src/tplapi/main.py                       |       46 |       10 |     78% |37-46, 50-63, 67 |
 | src/tplapi/models/\_\_init\_\_.py        |        0 |        0 |    100% |           |
-| src/tplapi/models/models.py              |       17 |        0 |    100% |           |
+| src/tplapi/models/models.py              |       12 |        0 |    100% |           |
 | src/tplapi/services/template\_service.py |      157 |       57 |     64% |31-39, 45-46, 52-58, 68-70, 99-100, 103-104, 107-111, 135-150, 156-180, 211-217, 271, 277-278 |
 | src/tplapi/services/upload\_service.py   |       97 |       76 |     22% |24-38, 44-70, 74-89, 95-113, 117-125 |
 | tests/api\_template\_test.py             |      194 |        4 |     98% |55, 60, 110-111 |
 | tests/api\_test.py                       |       31 |        0 |    100% |           |
-|                                **TOTAL** |  **935** |  **309** | **67%** |           |
+| **TOTAL**                                |  **928** |  **309** | **67%** |           |
 
 
 ## Setup coverage badge
