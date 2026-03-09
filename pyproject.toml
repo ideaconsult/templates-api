@@ -15,7 +15,7 @@ homepage = "https://enanomapper.adma.ai"
 repository = "https://github.com/ideaconsult/templates-api"
 requires-python = ">=3.10"
 dependencies = [
-    "apscheduler>=3.10.1,<=3.11.0",
+    "apscheduler>=3.10.1,<=3.11.2",
     "fastapi>=0.115.12",
     "h5grove>=3.0.0",
     "pydantic-settings>2.4.0,<3.0.0",
