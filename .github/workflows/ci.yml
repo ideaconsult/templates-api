@@ -42,7 +42,7 @@ jobs:
     steps:
 
       - name: Checkout the repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v6.0.2
 
       - name: Mask existing system Python
         run: sudo rm -r /usr/bin/python*
@@ -94,7 +94,7 @@ jobs:
     steps:
 
       - name: Checkout the repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v6.0.2
         with:
           # https://github.com/py-cov-action/python-coverage-comment-action/commit/2e8dc23
           fetch-depth: 1000
@@ -135,7 +135,7 @@ jobs:
     steps:
 
       - name: Checkout repository
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v6.0.2
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
