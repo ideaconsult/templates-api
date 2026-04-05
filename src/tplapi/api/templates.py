@@ -21,6 +21,9 @@ from fastapi import (
 )
 from fastapi.responses import FileResponse, JSONResponse
 from pynanomapper.datamodel.templates import template_designer
+from pynanomapper.datamodel.templates.data_entry_survey import (
+    blueprint_to_data_entry_survey,
+)
 
 from tplapi.api.utils import get_baseurl
 from tplapi.config.app_config import initialize_dirs
@@ -222,6 +225,7 @@ async def get_template(
     uuid: str,
     format: str = Query(None, description="format", enum=FILE_FORMATS),  # noqa: B008
     project: str = Query(None, description="project"),  # noqa: B008
+    data_entry: bool = Query(None, description="Data entry blueprint"),
     if_none_match: str = Header(None, alias="If-None-Match"),  # noqa: B008
     if_modified_since: str = Header(None, alias="If-Modified-Since"),  # noqa: B008
 ):
@@ -264,7 +268,10 @@ async def get_template(
                 return JSONResponse(content=None, status_code=304)
             # Return the data with updated headers
             response.headers.update(custom_headers)
-            return json_blueprint
+            if data_entry:
+                return blueprint_to_data_entry_survey(json_blueprint)
+            else:
+                return json_blueprint
             # response = JSONResponse(content=json_blueprint, headers=custom_headers)
         elif format == "nmparser":
             file_path = await template_service.get_nmparser_config(uuid, json_blueprint)
