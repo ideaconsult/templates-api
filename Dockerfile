@@ -27,4 +27,4 @@ ENV TEMPLATE_API_CONFIG="/app/tplapi/config/config.yaml"
 EXPOSE 80
 WORKDIR /app
 
-CMD ["uvicorn", "tplapi.main:app", "--host", "0.0.0.0", "--port", "80", "--workers", "4"]
+CMD ["uvicorn", "tplapi.main:app", "--host", "0.0.0.0", "--port", "80", "--workers", "4", "--proxy-headers", "--forwarded-allow-ips=*"]
