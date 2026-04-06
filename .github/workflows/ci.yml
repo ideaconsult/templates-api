@@ -23,7 +23,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   PY_DEFAULT: '3.13'
   REGISTRY: 'ghcr.io'
-  UV_VERSION: '0.7.12'
+  UV_VERSION: '0.11.3'
 
 
 jobs:
@@ -140,10 +140,7 @@ jobs:
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
-        if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@v4.0.0
-        with:
-          cosign-release: 'v2.5.0'
 
       # Workaround: https://github.com/docker/build-push-action/issues/461
       - name: Setup Docker buildx
@@ -152,7 +149,6 @@ jobs:
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
         uses: docker/login-action@v4.0.0
         with:
           registry: ${{ env.REGISTRY }}
@@ -192,15 +188,8 @@ jobs:
           cache-to: type=gha,mode=max
           context: .
           labels: ${{ steps.meta.outputs.labels }}
-          outputs: type=docker,dest=templates-api.tar
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
-
-      - name: Upload the built image as artifact for download
-        uses: actions/upload-artifact@v7.0.0
-        with:
-          name: templates-api.tar
-          path: templates-api.tar
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
@@ -208,7 +197,6 @@ jobs:
       # transparency data even for private images, pass --force to cosign below.
       # https://github.com/sigstore/cosign
       - name: Sign the published Docker image
-        if: github.event_name != 'pull_request'
         env:
           # https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-an-intermediate-environment-variable
           TAGS: ${{ steps.meta.outputs.tags }}
