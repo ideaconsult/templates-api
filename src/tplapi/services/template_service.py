@@ -73,7 +73,7 @@ def get_template_json(uuid):
     return json_data, file_path
 
 
-async def get_template_xlsx(uuid, json_blueprint, project):
+async def get_template_xlsx(uuid, json_blueprint, project, customization_json=None):
     try:
         file_path_xlsx = os.path.join(TEMPLATE_DIR, f"{uuid}.xlsx")
         json_blueprint = clean_blueprint_json(json_blueprint)
@@ -99,6 +99,13 @@ async def get_template_xlsx(uuid, json_blueprint, project):
             except Exception:
                 pass
             try:
+                if customization_json:
+                    bp.write_customization_to_excel(
+                        file_path_xlsx, json_blueprint, customization_json
+                    )
+            except Exception as err:
+                print(f"Warning: could not apply customization: {err}")
+            try:
                 add_project(file_path_xlsx, project)
             except Exception:
                 pass
@@ -118,7 +125,7 @@ async def get_nmparser_config(uuid, json_blueprint, force=True):
     return file_path
 
 
-async def get_template_nexus(uuid, json_blueprint):
+async def get_template_nexus(uuid, json_blueprint, customization_json=None):
     """
     Generate NeXus file from template blueprint.
 
@@ -134,7 +141,9 @@ async def get_template_nexus(uuid, json_blueprint):
     """
     try:
         # First generate Excel (needed for parsing with TemplateDesignerParser)
-        xlsx_path = await get_template_xlsx(uuid, json_blueprint, None)
+        xlsx_path = await get_template_xlsx(
+            uuid, json_blueprint, None, customization_json
+        )
 
         # Convert to NeXus
         nexus_path = os.path.join(TEMPLATE_DIR, f"{uuid}.nxs")
