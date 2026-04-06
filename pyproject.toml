@@ -19,7 +19,7 @@ dependencies = [
     "fastapi>=0.115.12",
     "h5grove>=3.0.0",
     "pydantic-settings>2.4.0,<3.0.0",
-    "pynanomapper>=2.2.0",
+    "pynanomapper>=2.3.0",
     "python-multipart>=0.0.22",
     "uvicorn>=0.34.2",
 ]

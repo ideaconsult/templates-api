@@ -1011,7 +1011,7 @@ wheels = [
 
 [[package]]
 name = "pynanomapper"
-version = "2.2.0"
+version = "2.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jproperties" },
@@ -1024,9 +1024,9 @@ dependencies = [
     { name = "requests" },
     { name = "xlsxwriter" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ed/20/9efdd9054eaf5f677da0c6b23471e21d74f915e8344346ff56b2df5fb15f/pynanomapper-2.2.0.tar.gz", hash = "sha256:bec9856680997e60eb311b6fb94143947658eeaa9d9717dee05b39679cf430f9", size = 140703, upload-time = "2026-02-16T15:16:04.368Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/04/d2/119c7d7592bac105a890d34594d4c8ea26c35c751b6a0cda21e7e923bfcb/pynanomapper-2.3.0.tar.gz", hash = "sha256:a24c8be8e497d1bb0a794415de421fe6c6e56b887a1c7dadceed0fbf29df594d", size = 155375, upload-time = "2026-04-06T09:39:19.963Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5d/f6/87c3b6bb683c5649be5809db5395d1273df3e2b498376c932a8ec03bd2ea/pynanomapper-2.2.0-py3-none-any.whl", hash = "sha256:26746871793dfd64e3dfe2b89e5d9f96ec2663137226689a2b9ca954662846b1", size = 150409, upload-time = "2026-02-16T15:16:02.466Z" },
+    { url = "https://files.pythonhosted.org/packages/23/fd/38c5c62d6430f3170d43ad6826ccfa554fb57cec9a2c0592b1db2a4dd92d/pynanomapper-2.3.0-py3-none-any.whl", hash = "sha256:f9c0b8e4e69c5b1c04fa98b7827d54f2b9b499a27fd160014de3ba54692b97a0", size = 165491, upload-time = "2026-04-06T09:39:18.484Z" },
 ]
 
 [[package]]
@@ -1325,7 +1325,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.115.12" },
     { name = "h5grove", specifier = ">=3.0.0" },
     { name = "pydantic-settings", specifier = ">2.4.0,<3.0.0" },
-    { name = "pynanomapper", specifier = ">=2.2.0" },
+    { name = "pynanomapper", specifier = ">=2.3.0" },
     { name = "python-multipart", specifier = ">=0.0.22" },
     { name = "uvicorn", specifier = ">=0.34.2" },
 ]
