@@ -21,6 +21,9 @@ from fastapi import (
 )
 from fastapi.responses import FileResponse, JSONResponse
 from pynanomapper.datamodel.templates import template_designer
+from pynanomapper.datamodel.templates.data_entry_survey import (
+    blueprint_to_data_entry_survey,
+)
 
 from tplapi.api.utils import get_baseurl
 from tplapi.config.app_config import initialize_dirs
@@ -195,6 +198,49 @@ async def makecopy(
     return task
 
 
+@router.post(
+    "/template/{uuid}/xlsx",
+    responses={
+        200: {
+            "description": "Returns the customized Excel template",
+            "content": {
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {}
+            },
+        },
+        404: {"description": "Template not found"},
+    },
+)
+async def generate_customized_xlsx(
+    request: Request,
+    uuid: str,
+    project: str = Query(None, description="project"),  # noqa: B008
+):
+    """Generate an Excel file pre-filled with data-entry answers POSTed as JSON body."""
+    if not is_valid_uuid(uuid):
+        raise HTTPException(status_code=400, detail="Invalid UUID")
+    json_blueprint, file_path = template_service.get_template_json(uuid)
+    if json_blueprint is None:
+        raise HTTPException(status_code=404, detail="Not found")
+    try:
+        customization_json = await request.json()
+    except Exception:
+        customization_json = None
+    try:
+        file_path_xlsx = await template_service.get_template_xlsx(
+            uuid, json_blueprint, project, customization_json
+        )
+        if project is not None:
+            template_service.add_materials(file_path_xlsx, fetch_materials(project))
+        return FileResponse(
+            file_path_xlsx,
+            media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            headers={"Content-Disposition": f'attachment; filename="{uuid}.xlsx"'},
+        )
+    except Exception as err:
+        traceback.print_exc()
+        raise HTTPException(status_code=400, detail=str(err))
+
+
 @router.get(
     "/template/{uuid}",
     responses={
@@ -222,9 +268,19 @@ async def get_template(
     uuid: str,
     format: str = Query(None, description="format", enum=FILE_FORMATS),  # noqa: B008
     project: str = Query(None, description="project"),  # noqa: B008
+    data_entry: bool = Query(None, description="Data entry blueprint"),
     if_none_match: str = Header(None, alias="If-None-Match"),  # noqa: B008
     if_modified_since: str = Header(None, alias="If-Modified-Since"),  # noqa: B008
 ):
+    # Customization JSON may be POSTed in the request body for xlsx/nxs formats
+    customization_json = None
+    if request.method == "POST" or format in ("xlsx", "nxs", "h5"):
+        try:
+            body = await request.body()
+            if body:
+                customization_json = await request.json()
+        except Exception:
+            pass
     # Construct the file path based on the provided UUID
     format_supported = {
         "xlsx": {
@@ -264,7 +320,10 @@ async def get_template(
                 return JSONResponse(content=None, status_code=304)
             # Return the data with updated headers
             response.headers.update(custom_headers)
-            return json_blueprint
+            if data_entry:
+                return blueprint_to_data_entry_survey(json_blueprint)
+            else:
+                return json_blueprint
             # response = JSONResponse(content=json_blueprint, headers=custom_headers)
         elif format == "nmparser":
             file_path = await template_service.get_nmparser_config(uuid, json_blueprint)
@@ -282,7 +341,7 @@ async def get_template(
         elif format == "xlsx":
             try:
                 file_path = await template_service.get_template_xlsx(
-                    uuid, json_blueprint, project
+                    uuid, json_blueprint, project, customization_json
                 )
                 if project is not None:
                     template_service.add_materials(file_path, fetch_materials(project))
@@ -305,7 +364,7 @@ async def get_template(
         elif format in ["nxs", "h5"]:
             try:
                 file_path = await template_service.get_template_nexus(
-                    uuid, json_blueprint
+                    uuid, json_blueprint, customization_json
                 )
                 # Return the file using FileResponse
                 _response = FileResponse(
