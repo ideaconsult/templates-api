@@ -1,7 +1,7 @@
 # templates-api
 A web API for the [AMBIT](https://ambit.sourceforge.net/)/[eNanoMapper](https://enanomapper.adma.ai/) data entry templates
 
-Implemented as a [FastAPI](https://fastapi.tiangolo.com/) service, this backend is to be used by applications like [Template Designer](https://github.com/ideaconsult/templateforge).
+Implemented as a [FastAPI](https://fastapi.tiangolo.com/) service, this backend is to be used by applications like [Template Designer](https://enanomapper.adma.ai/templates) (frontend code [Template Designer](https://github.com/ideaconsult/templateforge) )
 
 ## Acknowledgement
 
